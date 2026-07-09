@@ -238,29 +238,6 @@ Os três experimentos com Algoritmo Genético atingiram o mesmo recall de valida
 
 Como os três experimentos atingiram o mesmo recall de validação, a escolha da melhor configuração não deve se basear apenas nesse valor. A próxima análise deve verificar se os genes vencedores mantêm equilíbrio nas demais métricas, especialmente precision, F1-score e AUC, e confirmar o desempenho da configuração selecionada no conjunto de teste, que ainda não foi utilizado durante a otimização.
 
-## Estrutura do Projeto
-
-Uma estrutura sugerida para organização do repositório é:
-
-```text
-tech-challenge-ia-saude/
-│
-├── dataset/
-│   └── hypothyroid_final.csv
-│
-├── notebooks/
-│   └── 02_otimizacao_hiperparametros_ag.ipynb
-│
-├── models/
-│   └── modelos treinados
-│
-├── reports/
-│   ├── figures/
-│   └── results/
-│
-└── README.md
-```
-
 ## Tecnologias Utilizadas
 
 ```text
