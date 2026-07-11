@@ -194,27 +194,39 @@ TechChallenge_Tireoide
 
 # ▶ Como Executar
 
-1. Clonar o repositório
+### 1. Clonar o repositório
 
 ```bash
-git clone <url-do-repositório>
+git clone https://github.com/Val-Faria/tech-challenge-ia-saude.git
 ```
 
-2. Instalar as dependências
+### 2. Acessar a pasta do projeto
+
+```bash
+cd tech-challenge-ia-saude
+```
+
+### 3. Instalar as dependências
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configurar a variável:
+### 4. Configurar a chave da OpenAI
+
+Defina a variável de ambiente `OPENAI_API_KEY` ou informe a chave quando o notebook solicitar.
+
+### 5. Abrir o notebook
+
+Abra o arquivo:
 
 ```
-OPENAI_API_KEY=sua_chave_aqui
+02_otimizacao_hiperparametros_ag.ipynb
 ```
 
-4. Executar o notebook principal.
+preferencialmente utilizando o **Google Colab** ou o **Jupyter Notebook**.
 
----
+
 
 # 👥 Integrantes
 
