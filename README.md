@@ -334,7 +334,6 @@ deste README e na definição `\linkdovideo` do arquivo `main.tex` no Overleaf.
 # 👥 Integrantes
 
 - Marcelo Viana de Araujo
-- Rodrigo de Moraes Filomeno
 - Nirton Afonso de Oliveira Filho
 - Valkiria Nonato de Faria
 - Benicio Antonio Cardoso
