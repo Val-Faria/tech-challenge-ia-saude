@@ -10,6 +10,8 @@
 - [Relatório técnico final em PDF](./Relatorio%20Fase%202.pdf)
 - [Notebook executado no Google Colab](./02_otimizacao_hiperparametros_ag.ipynb)
 - [Modelo Random Forest otimizado](./models/random_forest_otimizado.joblib)
+- [API pública implantada no Render](https://tech-challenge-ia-saude.onrender.com)
+- [Documentação interativa da API](https://tech-challenge-ia-saude.onrender.com/docs)
 - Vídeo de demonstração: link será adicionado após a gravação e validação final.
 
 ---
@@ -59,8 +61,9 @@ flowchart TD
     J --> K[API FastAPI]
     K --> L[Logs JSON]
     K --> M[Métricas Prometheus]
-    K --> N[Google Cloud Run]
-    N --> O[Escalabilidade automática]
+    K --> N[Render - implantação pública]
+    K --> O[Cloud Run - configuração declarativa]
+    O --> P[Escalabilidade automática]
 ```
 
 O conjunto de teste permanece isolado durante a busca de hiperparâmetros. A API
@@ -130,6 +133,20 @@ estabilidade.
 
 # 📊 Resultados
 
+O segundo experimento do Algoritmo Genético foi selecionado, com os seguintes
+hiperparâmetros: `n_estimators=149`, `max_depth=20`,
+`min_samples_split=8`, `min_samples_leaf=5` e `max_features=log2`.
+
+| Modelo | Accuracy | Precision | Recall | F1-score | AUC-ROC |
+|---|---:|---:|---:|---:|---:|
+| Random Forest baseline | 0,9914 | 0,9048 | 0,9048 | 0,9048 | 0,9942 |
+| Random Forest otimizado | 0,9892 | 0,8333 | 0,9524 | 0,8889 | 0,9947 |
+
+O modelo otimizado aumentou o Recall em 4,76 pontos percentuais, equivalente a
+uma variação relativa de 5,26%. Esse ganho reduziu os falsos negativos de dois
+para um no conjunto de teste, acompanhado pelo aumento de falsos positivos de
+dois para quatro.
+
 O projeto gera automaticamente:
 
 ## Figuras
@@ -168,6 +185,10 @@ A IA produz uma interpretação em linguagem natural contendo:
 - limitações do modelo
 - recomendação de avaliação clínica
 
+A chave da OpenAI é necessária somente para a etapa opcional de geração da
+interpretação no notebook. A API de predição publicada no Render utiliza o modelo
+Random Forest treinado e não solicita chave da OpenAI ao usuário.
+
 ---
 
 # 🛠 Tecnologias Utilizadas
@@ -196,9 +217,9 @@ tech-challenge-ia-saude/
 ├── tests/
 ├── 02_otimizacao_hiperparametros_ag.ipynb
 ├── Dockerfile
-├── Relatorio Fase 2.docx
 ├── Relatorio Fase 2.pdf
 ├── README.md
+├── requirements-api.txt
 └── requirements.txt
 ```
 
@@ -230,9 +251,12 @@ pip install -r requirements.txt
 
 No Linux/macOS, ative o ambiente com `source .venv/bin/activate`.
 
-### 4. Configurar a chave da OpenAI
+### 4. Configurar a chave da OpenAI (opcional)
 
-Defina a variável de ambiente `OPENAI_API_KEY` ou informe a chave quando o notebook solicitar.
+Defina a variável de ambiente `OPENAI_API_KEY` ou informe a chave quando o
+notebook solicitar. A chave é necessária somente para gerar uma nova interpretação
+com a LLM; treinamento, avaliação do Random Forest e uso da API de predição não
+dependem dela.
 
 ### 5. Abrir o notebook
 
@@ -267,8 +291,24 @@ uvicorn api.main:app --host 0.0.0.0 --port 8080
 - saúde: `http://localhost:8080/health`
 - métricas: `http://localhost:8080/metrics`
 
-O arquivo `cloudrun/service.yaml` configura escalabilidade automática entre zero e
-cinco instâncias. A implantação em nuvem permanece opcional.
+### 8. Utilizar a API pública
+
+A mesma aplicação está implantada no Render e pode ser utilizada sem executar um
+servidor local:
+
+- URL base: `https://tech-challenge-ia-saude.onrender.com`
+- documentação: `https://tech-challenge-ia-saude.onrender.com/docs`
+- saúde: `https://tech-challenge-ia-saude.onrender.com/health`
+- métricas: `https://tech-challenge-ia-saude.onrender.com/metrics`
+
+O notebook utiliza a API remota por padrão e também permite selecionar o modo
+local. No plano gratuito do Render, o primeiro acesso após um período de
+inatividade pode exigir alguns segundos para inicialização.
+
+O arquivo `cloudrun/service.yaml` permanece como referência de uma arquitetura com
+escalabilidade automática entre zero e cinco instâncias. A implantação pública
+utilizada na demonstração foi realizada no Render; portanto, essa configuração do
+Cloud Run não representa uma evidência de autoscaling executado durante o projeto.
 
 
 
