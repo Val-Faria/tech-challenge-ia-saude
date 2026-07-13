@@ -5,6 +5,13 @@
 
 [![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Val-Faria/tech-challenge-ia-saude/blob/Nirton/02_otimizacao_hiperparametros_ag.ipynb)
 
+## Entregáveis
+
+- [Relatório técnico final em PDF](./Relatorio%20Fase%202.pdf)
+- [Notebook executado no Google Colab](./02_otimizacao_hiperparametros_ag.ipynb)
+- [Modelo Random Forest otimizado](./models/random_forest_otimizado.joblib)
+- Vídeo de demonstração: link será adicionado após a gravação e validação final.
+
 ---
 
 ## 📌 Objetivo
@@ -185,9 +192,12 @@ tech-challenge-ia-saude/
 ├── cloudrun/
 │   └── service.yaml
 ├── models/
+│   └── random_forest_otimizado.joblib
 ├── tests/
 ├── 02_otimizacao_hiperparametros_ag.ipynb
 ├── Dockerfile
+├── Relatorio Fase 2.docx
+├── Relatorio Fase 2.pdf
 ├── README.md
 └── requirements.txt
 ```
@@ -245,7 +255,9 @@ pytest -q
 
 ### 7. Executar a API local
 
-Depois que o notebook gerar `models/random_forest_otimizado.joblib`:
+O modelo treinado já está versionado em `models/random_forest_otimizado.joblib`.
+O notebook pode ser executado novamente para reproduzir o treinamento e substituir
+o artefato, caso necessário.
 
 ```bash
 uvicorn api.main:app --host 0.0.0.0 --port 8080
@@ -263,9 +275,10 @@ cinco instâncias. A implantação em nuvem permanece opcional.
 # 👥 Integrantes
 
 - Marcelo Viana de Araujo
-- Valéria Faria
-- Benicio
-- Nirton Afonso
+- Rodrigo de Moraes Filomeno
+- Nirton Afonso de Oliveira Filho
+- Valkiria Nonato de Faria
+- Benicio Antonio Cardoso
 
 ---
 
