@@ -12,6 +12,7 @@
 - [Modelo Random Forest otimizado](./models/random_forest_otimizado.joblib)
 - [API pública implantada no Render](https://tech-challenge-ia-saude.onrender.com)
 - [Documentação interativa da API](https://tech-challenge-ia-saude.onrender.com/docs)
+<!-- Quando o vídeo estiver publicado, substitua somente a linha abaixo pelo link do YouTube ou Vimeo. -->
 - Vídeo de demonstração: link será adicionado após a gravação e validação final.
 
 ---
@@ -251,6 +252,9 @@ pip install -r requirements.txt
 
 No Linux/macOS, ative o ambiente com `source .venv/bin/activate`.
 
+Para executar somente a API, sem as bibliotecas utilizadas no notebook, instale
+`requirements-api.txt` no lugar de `requirements.txt`.
+
 ### 4. Configurar a chave da OpenAI (opcional)
 
 Defina a variável de ambiente `OPENAI_API_KEY` ou informe a chave quando o
@@ -309,6 +313,21 @@ O arquivo `cloudrun/service.yaml` permanece como referência de uma arquitetura 
 escalabilidade automática entre zero e cinco instâncias. A implantação pública
 utilizada na demonstração foi realizada no Render; portanto, essa configuração do
 Cloud Run não representa uma evidência de autoscaling executado durante o projeto.
+
+## Checklist do vídeo de demonstração
+
+O vídeo deve ter até 15 minutos e ser publicado no YouTube ou Vimeo como público
+ou não listado. Para atender ao enunciado, a gravação deve apresentar:
+
+- o notebook sendo executado ou seus resultados já registrados;
+- os componentes principais da solução;
+- os três experimentos do Algoritmo Genético e o modelo selecionado;
+- a comparação entre o Random Forest baseline e o otimizado;
+- a geração e a avaliação da interpretação pela LLM;
+- uma chamada de predição na API pública.
+
+Quando o link estiver disponível, ele deve ser incluído na seção **Entregáveis**
+deste README e na definição `\linkdovideo` do arquivo `main.tex` no Overleaf.
 
 
 

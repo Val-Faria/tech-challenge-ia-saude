@@ -6,8 +6,8 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+COPY requirements-api.txt .
+RUN pip install --no-cache-dir -r requirements-api.txt
 
 COPY api ./api
 COPY models ./models

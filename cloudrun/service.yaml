@@ -10,7 +10,7 @@ spec:
       annotations:
         autoscaling.knative.dev/minScale: "0"
         autoscaling.knative.dev/maxScale: "5"
-        autoscaling.knative.dev/target: "15"
+        run.googleapis.com/scaling-concurrency-target: "15"
     spec:
       containerConcurrency: 20
       timeoutSeconds: 60
