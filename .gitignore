@@ -1,6 +1,7 @@
 # Python
 __pycache__/
 *.py[cod]
+.venv/
 
 # Jupyter
 .ipynb_checkpoints/
@@ -10,6 +11,7 @@ __pycache__/
 
 # Modelos gerados
 *.joblib
+!models/random_forest_otimizado.joblib
 
 # Arquivos temporários
 .DS_Store
