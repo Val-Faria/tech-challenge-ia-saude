@@ -3,7 +3,7 @@
 
 ### FIAP - Pós-Graduação em IA para Desenvolvedores
 
-[![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Val-Faria/tech-challenge-ia-saude/blob/main/02_otimizacao_hiperparametros_ag.ipynb)
+[![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Val-Faria/tech-challenge-ia-saude/blob/Nirton/02_otimizacao_hiperparametros_ag.ipynb)
 
 ---
 
@@ -201,7 +201,7 @@ As pastas `dataset/` e `reports/` são criadas automaticamente pelo notebook.
 ### 1. Clonar o repositório
 
 ```bash
-git clone https://github.com/Val-Faria/tech-challenge-ia-saude.git
+git clone --branch Nirton --single-branch https://github.com/Val-Faria/tech-challenge-ia-saude.git
 ```
 
 ### 2. Acessar a pasta do projeto

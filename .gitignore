@@ -11,6 +11,7 @@ __pycache__/
 
 # Modelos gerados
 *.joblib
+!models/random_forest_otimizado.joblib
 
 # Arquivos temporários
 .DS_Store
