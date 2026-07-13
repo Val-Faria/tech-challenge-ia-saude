@@ -3,6 +3,8 @@
 
 ### FIAP - Pós-Graduação em IA para Desenvolvedores
 
+[![Abrir no Google Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/Val-Faria/tech-challenge-ia-saude/blob/main/02_otimizacao_hiperparametros_ag.ipynb)
+
 ---
 
 ## 📌 Objetivo
@@ -27,8 +29,8 @@ O conjunto passou pelas etapas de:
 - limpeza
 - tratamento de valores ausentes
 - codificação de variáveis categóricas
-- divisão treino/teste
-- balanceamento das classes quando necessário
+- divisão estratificada em treino, validação e teste
+- ponderação das classes no Random Forest
 
 ---
 
@@ -36,33 +38,26 @@ O conjunto passou pelas etapas de:
 
 Fluxo geral do projeto:
 
-```text
-Dataset
-      │
-      ▼
-Pré-processamento
-      │
-      ▼
-Random Forest (Baseline)
-      │
-      ▼
-Algoritmo Genético
-      │
-      ▼
-Melhores Hiperparâmetros
-      │
-      ▼
-Modelo Otimizado
-      │
-      ▼
-Avaliação
-      │
-      ▼
-LLM (OpenAI)
-      │
-      ▼
-Explicação em Linguagem Natural
+```mermaid
+flowchart TD
+    A[Dataset clínico] --> B[Limpeza e divisão estratificada]
+    B --> C[Random Forest baseline]
+    B --> D[Algoritmo Genético]
+    D --> E[Validação cruzada estratificada - 3 folds]
+    E --> F[Melhores hiperparâmetros]
+    F --> G[Modelo otimizado]
+    G --> H[Avaliação final no conjunto de teste]
+    G --> I[Interpretação com LLM]
+    G --> J[Artefato Joblib]
+    J --> K[API FastAPI]
+    K --> L[Logs JSON]
+    K --> M[Métricas Prometheus]
+    K --> N[Google Cloud Run]
+    N --> O[Escalabilidade automática]
 ```
+
+O conjunto de teste permanece isolado durante a busca de hiperparâmetros. A API
+carrega apenas o artefato final e não participa do processo de treinamento.
 
 ---
 
@@ -100,11 +95,12 @@ Características implementadas:
 
 - população inicial aleatória
 - seleção por torneio
-- crossover uniforme
-- mutação
-- elitismo
+- crossover de dois pontos
+- mutação uniforme inteira com limites por gene
+- elitismo real com preservação do melhor indivíduo
 - cache de fitness
 - histórico completo das gerações
+- logging em arquivo e no console
 
 ---
 
@@ -117,7 +113,11 @@ Foram realizados três experimentos variando:
 - probabilidade de crossover
 - taxa de mutação
 
-Ao final, foi selecionado automaticamente o melhor indivíduo considerando o maior Recall.
+As configurações usam seeds distintas. Cada indivíduo é avaliado por validação
+cruzada estratificada com três folds sobre o conjunto de treino. A seleção é
+lexicográfica: maximiza primeiro o Recall médio e utiliza F1-Score e AUC para
+resolver empates. O desvio-padrão do Recall é registrado como medida de
+estabilidade.
 
 ---
 
@@ -179,16 +179,20 @@ A IA produz uma interpretação em linguagem natural contendo:
 # 📁 Estrutura do Projeto
 
 ```text
-TechChallenge_Tireoide
-│
-├── dataset/
+tech-challenge-ia-saude/
+├── api/
+│   └── main.py
+├── cloudrun/
+│   └── service.yaml
 ├── models/
-├── reports/
-│   ├── figures/
-│   └── results/
-├── notebooks/
-└── README.md
+├── tests/
+├── 02_otimizacao_hiperparametros_ag.ipynb
+├── Dockerfile
+├── README.md
+└── requirements.txt
 ```
+
+As pastas `dataset/` e `reports/` são criadas automaticamente pelo notebook.
 
 ---
 
@@ -208,9 +212,13 @@ cd tech-challenge-ia-saude
 
 ### 3. Instalar as dependências
 
-```bash
+```powershell
+python -m venv .venv
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 ```
+
+No Linux/macOS, ative o ambiente com `source .venv/bin/activate`.
 
 ### 4. Configurar a chave da OpenAI
 
@@ -225,6 +233,30 @@ Abra o arquivo:
 ```
 
 preferencialmente utilizando o **Google Colab** ou o **Jupyter Notebook**.
+
+No Colab, use **Ambiente de execução > Executar tudo**. O notebook instala as
+dependências essenciais, clona o repositório e baixa o dataset automaticamente.
+
+### 6. Executar os testes
+
+```bash
+pytest -q
+```
+
+### 7. Executar a API local
+
+Depois que o notebook gerar `models/random_forest_otimizado.joblib`:
+
+```bash
+uvicorn api.main:app --host 0.0.0.0 --port 8080
+```
+
+- documentação interativa: `http://localhost:8080/docs`
+- saúde: `http://localhost:8080/health`
+- métricas: `http://localhost:8080/metrics`
+
+O arquivo `cloudrun/service.yaml` configura escalabilidade automática entre zero e
+cinco instâncias. A implantação em nuvem permanece opcional.
 
 
 
