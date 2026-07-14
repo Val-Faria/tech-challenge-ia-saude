@@ -313,27 +313,9 @@ escalabilidade automática entre zero e cinco instâncias. A implantação públ
 utilizada na demonstração foi realizada no Render; portanto, essa configuração do
 Cloud Run não representa uma evidência de autoscaling executado durante o projeto.
 
-## Checklist do vídeo de demonstração
-
-O vídeo deve ter até 15 minutos e ser publicado no YouTube ou Vimeo como público
-ou não listado. Para atender ao enunciado, a gravação deve apresentar:
-
-- o notebook sendo executado ou seus resultados já registrados;
-- os componentes principais da solução;
-- os três experimentos do Algoritmo Genético e o modelo selecionado;
-- a comparação entre o Random Forest baseline e o otimizado;
-- a geração e a avaliação da interpretação pela LLM;
-- uma chamada de predição na API pública.
-
-Quando o link estiver disponível, ele deve ser incluído na seção **Entregáveis**
-deste README e na definição `\linkdovideo` do arquivo `main.tex` no Overleaf.
-
-
-
 # 👥 Integrantes
 
 - Marcelo Viana de Araujo
-- Rodrigo de Moraes Filomeno
 - Nirton Afonso de Oliveira Filho
 - Valkiria Nonato de Faria
 - Benicio Antonio Cardoso
