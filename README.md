@@ -12,8 +12,7 @@
 - [Modelo Random Forest otimizado](./models/random_forest_otimizado.joblib)
 - [API pública implantada no Render](https://tech-challenge-ia-saude.onrender.com)
 - [Documentação interativa da API](https://tech-challenge-ia-saude.onrender.com/docs)
-<!-- Quando o vídeo estiver publicado, substitua somente a linha abaixo pelo link do YouTube ou Vimeo. -->
-- Vídeo de demonstração: link será adicionado após a gravação e validação final.
+- [Vídeo de demonstração](https://www.youtube.com/watch?v=IXaI20e1feE)
 
 ---
 
